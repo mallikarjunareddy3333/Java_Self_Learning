@@ -13,7 +13,9 @@ public class LinkedListTest {
 		list.add(30);
 		list.add(40);
 		list.add(50);
-
+		
+		System.out.println(list.get(4));
+		
 		Deque<Integer> myList = new LinkedList<>();
 		myList.addFirst(10);
 		myList.addFirst(20);

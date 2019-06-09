@@ -38,6 +38,21 @@ public class LinkedList {
 			throw new Exception("List is empty.");
 		}
 	}
+	
+	public int get(int index) {
+		int size = size();
+		if (index >= 0 && index < size ) {
+			Node temp = head;
+			int count = 0;
+			while (index != count) {
+				temp = temp.next;
+				count++;
+			}
+			return temp.data;
+		} else {
+			throw new IndexOutOfBoundsException();
+		}
+	}
 
 	public void display() {
 		System.out.print("List: ");
@@ -71,10 +86,11 @@ public class LinkedList {
 		list.insertAtEnd(50);
 		list.display();
 		System.out.println("Size:" + list.size());
-		System.out.println(list.delete() + " deleted");
+		//System.out.println(list.delete() + " deleted");
 		list.display();
 		list.insertAtEnd(60);
 		list.display();
+		System.out.println(list.get(4));
 	}
 
 }
