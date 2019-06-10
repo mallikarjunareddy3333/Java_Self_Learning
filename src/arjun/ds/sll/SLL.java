@@ -1,6 +1,6 @@
 package arjun.ds.sll;
 
-public class LinkedList {
+public class SLL {
 
 	private Node head;
 
@@ -56,6 +56,7 @@ public class LinkedList {
 		Node temp = head;
 
 		if (pos == 0) {
+			System.out.println("deleted element is " + temp.data);
 			head = temp.next;
 			return;
 		}
@@ -66,7 +67,9 @@ public class LinkedList {
 
 		if (temp == null || temp.next == null)
 			return;
+
 		Node next = temp.next.next;
+		System.out.println("deleted element is " + temp.next.data);
 		temp.next = next;
 	}
 
@@ -125,7 +128,7 @@ public class LinkedList {
 	}
 
 	public static void main(String[] args) throws Exception {
-		LinkedList list = new LinkedList();
+		SLL list = new SLL();
 		// System.out.println(list.delete() + " deleted");
 		list.display();
 		System.out.println("Size:" + list.size());
