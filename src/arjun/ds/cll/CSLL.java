@@ -10,48 +10,62 @@ class Node {
 }
 
 public class CSLL {
-	
+
 	Node head;
-	
-	public void insert(int data) {
+	Node tail;
+
+	public void insertAtFront(int data) {
 		Node newNode = new Node(data);
-		System.out.println("element "+ data + " is inserted.");
+		System.out.println("element " + data + " is inserted.");
 		if (head == null) {
-			head = newNode;
+			head = tail = newNode;
+			tail.next = head;
+			return;
+		}
+		
+		newNode.next = head;
+		tail.next = newNode;
+		head = newNode;
+	}
+	
+	public void insertAtEnd(int data) {
+		Node newNode = new Node(data);
+		System.out.println("element " + data + " is inserted.");
+		if (head == null) {
+			head = tail = newNode;
 			newNode.next = head;
 			return;
 		}
 		
-		Node temp = head;
-		while(temp.next != head) {
-			temp = temp.next;
-		}
-		
-		newNode.next = head;
-		temp.next = newNode;
+		tail.next = newNode;
+		newNode.next = head;		
+		tail = newNode;
 	}
-	
+
 	public void display() {
 		if (head == null) {
 			System.out.println("List is empty.");
 			return;
 		}
-		
+
 		Node temp = head;
-		while(temp.next != head) {
+		while (temp.next != head) {
 			System.out.print(temp.data + "->");
 			temp = temp.next;
 		}
-		System.out.print(temp.data + "->");
-		System.out.println(temp.next.data);
+		System.out.println(temp.data);
 	}
 
 	public static void main(String[] args) {
 		CSLL list = new CSLL();
 		list.display();
-		list.insert(10);
+		list.insertAtEnd(10);
 		list.display();
-		list.insert(20);
+		list.insertAtEnd(20);
+		list.display();
+		list.insertAtEnd(30);
+		list.display();
+		list.insertAtFront(5);
 		list.display();
 	}
 
