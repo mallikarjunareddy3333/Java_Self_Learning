@@ -1,16 +1,14 @@
 package arjun.ds.dll;
 
 public class DLL {
-
-	Node head;
-
-	public void push(int data) {
+	
+	public Node push(Node head, int data) {
 		Node newNode = new Node(data);
 		System.out.println("\nelement " + data + " is added to the list");
 
 		if (head == null) {
 			head = newNode;
-			return;
+			return head;
 		}
 
 		if (head != null) {
@@ -19,14 +17,15 @@ public class DLL {
 			temp.prev = newNode;
 			head = newNode;
 		}
+		return head;
 	}
 
 	/* Given a node as prev_node, insert a new node after the given node */
-	public void insertAfter(Node prev_node, int new_data) {
+	public Node insertAfter(Node head, Node prev_node, int new_data) {
 
 		if (prev_node == null) {
 			System.out.println("The given previous node cannot be NULL ");
-			return;
+			return head;
 		}
 
 		Node new_node = new Node(new_data);
@@ -40,16 +39,16 @@ public class DLL {
 		}
 
 		System.out.println("\nelement " + new_data + " is added after " + prev_node.data + " to the list");
-
+		return head;
 	}
 
-	public void append(int data) {
+	public Node append(Node head, int data) {
 
 		Node newNode = new Node(data);
-
+		System.out.println("\nelement " + data + " is added to the end of the list");
 		if (head == null) {
 			head = newNode;
-			return;
+			return head;
 		}
 
 		Node temp = head;
@@ -60,16 +59,15 @@ public class DLL {
 
 		temp.next = newNode;
 		newNode.prev = temp;
-		System.out.println("\nelement " + data + " is added to the end of the list");
-
+		return head;
 	}
 
 	/* This method will remove the first element from the list */
-	public void remove() {
+	public Node remove(Node head) {
 
 		if (head == null) {
 			System.out.println("List is empty.");
-			return;
+			return head;
 		}
 
 		Node temp = head;
@@ -84,13 +82,13 @@ public class DLL {
 		System.out.println("\nelement " + head.data + " removed");
 
 		head = temp;
-
+		return head;
 	}
 
-	public void removeAtEnd() {
+	public Node removeAtEnd(Node head) {
 		if (head == null) {
 			System.out.println("List is empty.");
-			return;
+			return head;
 		}
 
 		Node temp = head;
@@ -106,20 +104,22 @@ public class DLL {
 		else
 			temp = null;
 		
+		return head;
+		
 	}
 
-	public void remove(int value) {
+	public Node remove(Node head, int value) {
 		boolean found = false;
 		if (head == null) {
 			System.out.println("List is empty.");
-			return;
+			return head;
 		}
 		
 
 		Node temp = head;
 		if (temp.data == value) {
-			remove();
-			return;
+			head =  remove(head);
+			return head;
 		}
 
 		while (temp != null) {
@@ -135,24 +135,26 @@ public class DLL {
 			System.out.println("\nelement " + temp.data + " removed");
 			if (temp.next == null) {
 				temp.prev.next = null;
-				return;
+				return head;
 			}
 			
 			if (temp.prev == null) {
-				remove();
-				return;
+				head = remove(head);
+				return head;
 			}
 			
 			temp.prev.next = temp.next;
 			temp.next.prev = temp.prev;
+			return head;
 		} else {
 			System.out.println("\nelement " + value + " not found");
 		}
-
+		
+		return head;
 		
 	}
 
-	public void printList() {
+	public void printList(Node head) {
 		Node temp = head;
 		Node lastNode = head;
 		System.out.print("Elements forward order: ");
@@ -180,46 +182,43 @@ public class DLL {
 
 	public static void main(String[] args) {
 		/* Start with the empty list */
+		
+		Node head = new Node(1);
+		
 		DLL list = new DLL();
-		list.printList();
+		list.printList(null);
 
-		list.remove();
-		list.printList();
+		head = list.remove(null);
+		list.printList(head);
 
-		list.push(10);
-		list.printList();
+		head = list.push(head, 10);
+		list.printList(head);
 
-		list.remove();
-		list.printList();
+		head = list.remove(head);
+		list.printList(head);
 
-		list.push(20);
-		list.printList();
+		head = list.push(head, 20);
+		list.printList(head);
 
-		list.remove();
-		list.printList();
+		head = list.remove(head);
+		list.printList(head);
 
-		list.append(40);
-		list.printList();
+		head = list.append(head, 40);
+		list.printList(head);
 
-		list.insertAfter(list.head, 30);
-		list.printList();
+		head = list.insertAfter(head, head, 30);
+		list.printList(head);
 
-		list.remove();
-		list.printList();
+		head = list.remove(head);
+		list.printList(head);
 
-		list.append(50);
-		list.append(60);
-		list.append(70);
-		list.printList();
+		head = list.append(head, 50);
+		head = list.append(head, 60);
+		head = list.append(head, 70);
+		list.printList(head);
 		
-		list.removeAtEnd();
-		list.printList();
-
-		list.remove(50);
-		list.printList();
-		
-		list.remove(70);
-		list.printList();
+		head = list.removeAtEnd(head);
+		list.printList(head);
 	}
 
 }

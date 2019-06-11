@@ -41,6 +41,45 @@ public class CSLL {
 		newNode.next = head;		
 		tail = newNode;
 	}
+	
+	public void deleteAtFront() {
+		if (head == null) {
+			System.out.println("List is empty.");
+			return;			
+		}
+		
+		System.out.println("element "+ head.data+ " removed");
+		
+		if (head.next == head) {
+			head = tail = null;
+			return;
+		}
+		
+		tail.next = head.next;
+		head = head.next;
+	}
+	
+	public void deleteAtEnd() {
+		if (head == null) {
+			System.out.println("List is empty.");
+			return;			
+		}
+		
+		System.out.println("element "+ tail.data+ " removed");
+		
+		if (head.next == head) {
+			head = tail = null;
+			return;
+		}
+		
+		Node temp = head;
+		while(temp.next != tail) {
+			temp = temp.next;
+		}
+		
+		temp.next = tail.next;
+		tail = temp;
+	}
 
 	public void display() {
 		if (head == null) {
@@ -61,11 +100,19 @@ public class CSLL {
 		list.display();
 		list.insertAtEnd(10);
 		list.display();
+		list.deleteAtFront();
+		list.display();
 		list.insertAtEnd(20);
 		list.display();
 		list.insertAtEnd(30);
 		list.display();
 		list.insertAtFront(5);
+		list.display();
+		list.deleteAtEnd();
+		list.display();
+		list.deleteAtEnd();
+		list.display();
+		list.deleteAtEnd();
 		list.display();
 	}
 

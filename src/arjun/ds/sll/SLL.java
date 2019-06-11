@@ -2,15 +2,14 @@ package arjun.ds.sll;
 
 public class SLL {
 
-	private Node head;
-
-	public void insert(int data) {
+	public Node insert(Node head, int data) {
 		Node newNode = new Node(data);
 		newNode.next = head;
 		head = newNode;
+		return head;
 	}
 
-	public void insertAtEnd(int data) throws Exception {
+	public Node insertAtEnd(Node head, int data) throws Exception {
 		Node newNode = new Node(data);
 		Node temp = head;
 		if (temp == null) {
@@ -24,33 +23,34 @@ public class SLL {
 			temp.next = newNode;
 			newNode.next = null;
 		}
+		return head;
 	}
 
-	public int delete() throws Exception {
+	public Node delete(Node head) throws Exception {
 		if (head != null) {
-			int value = head.data;
 			if (head.next != null)
 				head = head.next;
 			else
 				head = null;
-			return value;
+			return head;
 		} else {
 			throw new Exception("List is empty.");
 		}
 	}
 
-	public void insertAtPos(int pos, int data) throws Exception {
-		Node temp = getNthNode(pos);
+	public Node insertAtPos(Node head, int pos, int data) throws Exception {
+		Node temp = getNthNode(head, pos);
 		System.out.println(temp.data);
 		Node newNode = new Node(data);
 		Node x = temp.next;
 		temp.next = newNode;
 		newNode.next = x;
+		return head;
 	}
 
-	public void deleteAtPos(int pos) throws Exception {
+	public Node deleteAtPos(Node head, int pos) throws Exception {
 		if (head == null) {
-			return;
+			return head;
 		}
 
 		Node temp = head;
@@ -58,7 +58,7 @@ public class SLL {
 		if (pos == 0) {
 			System.out.println("deleted element is " + temp.data);
 			head = temp.next;
-			return;
+			return head;
 		}
 
 		for (int i = 0; i < pos - 1 && temp != null; i++) {
@@ -66,15 +66,17 @@ public class SLL {
 		}
 
 		if (temp == null || temp.next == null)
-			return;
+			return head;
 
 		Node next = temp.next.next;
 		System.out.println("deleted element is " + temp.next.data);
 		temp.next = next;
+		
+		return head;
 	}
 
-	public Node getNthNode(int index) throws Exception {
-		int size = size();
+	public Node getNthNode(Node head, int index) throws Exception {
+		int size = size(head);
 		Node temp = head;
 		if (size == 0) {
 			throw new Exception("List is empty");
@@ -92,8 +94,8 @@ public class SLL {
 		}
 	}
 
-	public int get(int index) {
-		int size = size();
+	public int get(Node head, int index) {
+		int size = size(head);
 		if (index >= 0 && index < size) {
 			Node temp = head;
 			int count = 0;
@@ -107,7 +109,7 @@ public class SLL {
 		}
 	}
 
-	public void display() {
+	public void display(Node head) {
 		System.out.print("List: ");
 		Node temp = head;
 		while (temp != null) {
@@ -117,7 +119,7 @@ public class SLL {
 		System.out.println("null");
 	}
 
-	public int size() {
+	public int size(Node head) {
 		Node temp = head;
 		int count = 0;
 		while (temp != null) {
@@ -129,35 +131,37 @@ public class SLL {
 
 	public static void main(String[] args) throws Exception {
 		SLL list = new SLL();
+		Node head = new Node(1);
+		
 		// System.out.println(list.delete() + " deleted");
-		list.display();
-		System.out.println("Size:" + list.size());
+		list.display(head);
+		System.out.println("Size:" + list.size(head));
 		// list.deleteAtPos(6);
-		list.display();
+		list.display(head);
 
-		list.insertAtEnd(10);
-		list.display();
+		head = list.insertAtEnd(head, 10);
+		list.display(head);
 
-		list.deleteAtPos(0);
-		list.display();
+		head = list.deleteAtPos(head, 0);
+		list.display(head);
 
-		list.insertAtEnd(20);
-		list.insertAtEnd(30);
-		list.insertAtEnd(40);
-		list.insertAtEnd(50);
-		list.display();
-		System.out.println("Size:" + list.size());
+		head = list.insertAtEnd(head, 20);
+		head = list.insertAtEnd(head, 30);
+		head = list.insertAtEnd(head, 40);
+		head = list.insertAtEnd(head, 50);
+		list.display(head);
+		System.out.println("Size:" + list.size(head));
 		// System.out.println(list.delete() + " deleted");
-		list.display();
-		list.insertAtEnd(60);
-		list.display();
-		System.out.println(list.get(4));
+		list.display(head);
+		head = list.insertAtEnd(head, 60);
+		list.display(head);
+		System.out.println(list.get(head, 4));
 
-		list.insertAtPos(2, 15);
-		list.display();
+		head = list.insertAtPos(head, 2, 15);
+		list.display(head);
 
-		list.deleteAtPos(4);
-		list.display();
+		head = list.deleteAtPos(head, 4);
+		list.display(head);
 	}
 
 }
