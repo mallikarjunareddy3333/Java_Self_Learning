@@ -1,37 +1,52 @@
 package arjun.ds.sll;
 
-import java.util.Deque;
-import java.util.LinkedList;
-import java.util.List;
-
 public class LinkedListTest {
 
+	public static void printMiddle(Node head) {
+		Node slow_ptr = head, fast_ptr = head;
+		if (head != null) {
+			while (fast_ptr != null && fast_ptr.next != null) {
+				slow_ptr = slow_ptr.next;
+				fast_ptr = fast_ptr.next.next;
+			}
+
+			System.out.println("Middle element:" + slow_ptr.data);
+		}
+
+	}
+
+	public static void printMiddle2(Node head) {
+		Node mid = head;
+		int count = 0;
+		while (head != null) {
+			if (count % 2 != 0) {
+				mid = mid.next;
+			}
+			count++;
+			head = head.next;
+		}
+
+		if (mid != null) {
+			System.out.println("Middle element: " + mid.data);
+		}
+	}
+	
+	
+	
 	public static void main(String[] args) {
-		List<Integer> list = new LinkedList<>();
-		list.add(10);
-		list.add(20);
-		list.add(30);
-		list.add(40);
-		list.add(50);
-		
-		System.out.println(list.get(4));
-		
-		Deque<Integer> myList = new LinkedList<>();
-		myList.addFirst(10);
-		myList.addFirst(20);
-		myList.addFirst(30);
-		myList.addFirst(40);
-		myList.addFirst(50);
-
-		list.iterator().forEachRemaining((i) -> {
-			System.out.print(i + " ");
-		});
-
-		System.out.println();
-
-		myList.iterator().forEachRemaining((i) -> {
-			System.out.print(i + " ");
-		});
+		SLL list = new SLL();
+		Node head = null;
+		head = list.insert(head, 10);
+		head = list.insert(head, 20);
+		head = list.insert(head, 30);
+		head = list.insert(head, 40);
+		list.display(head);
+		printMiddle(head);
+		printMiddle2(head);
+		head = list.insert(head, 50);
+		list.display(head);
+		printMiddle(head);
+		printMiddle2(head);
 	}
 
 }
