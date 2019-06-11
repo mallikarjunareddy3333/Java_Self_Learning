@@ -39,6 +39,45 @@ public class CLL {
 		
 		return last;
 	}
+	
+	public Node deleteAtFirst(Node last) {
+		if (last == null) {
+			System.out.println("List is empty.");
+			return last;
+		}
+		
+		if (last.next == last) {
+			last = null;
+			return null;
+		}
+		
+		Node start = last.next;
+		last.next = start.next;
+		
+		return last;
+	}
+	
+	public Node deleteAtEnd(Node last) {
+		if (last == null) {
+			System.out.println("List is empty.");
+			return last;
+		}
+		
+		if (last.next == last) {
+			last = null;
+			return null;
+		}
+		
+		Node temp = last;
+		while(temp.next != last) {
+			temp = temp.next;
+		}
+		
+		temp.next = last.next;
+		last = temp;
+		
+		return last;
+	}
 
 	public void display(Node last) {
 		if (last == null) {
@@ -47,7 +86,7 @@ public class CLL {
 		}
 		System.out.print("\nList: ");
 		Node temp = last.next;
-		while (temp.next != last) {
+		while (temp != last) {
 			System.out.print(temp.data + " -> ");
 			temp = temp.next;
 		}
@@ -66,6 +105,10 @@ public class CLL {
 		last = list.insertAtStart(last, 20);
 		list.display(last);
 		last = list.insertAtEnd(last, 50);
+		list.display(last);
+		last = list.deleteAtFirst(last);
+		list.display(last);
+		last = list.deleteAtEnd(last);
 		list.display(last);
 	}
 
