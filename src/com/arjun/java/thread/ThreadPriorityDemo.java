@@ -1,60 +1,36 @@
 package com.arjun.java.thread;
 
+class MyThread3 extends Thread {
+	public void run() {
+		for (int i = 0; i < 10; i++) {
+			System.out.println("child1 thread");
+		}
+	}
+}
+
+class MyThread4 extends Thread {
+	public void run() {
+		for (int i = 0; i < 10; i++) {
+			System.out.println("child2 thread");
+		}
+	}
+}
+
 public class ThreadPriorityDemo {
 
-	public static void main(String[] args) 
-    { 
-        // getting reference to Main thread 
-        Thread t = Thread.currentThread(); 
-          
-        // getting name of Main thread 
-        System.out.println("Current thread: " + t.getName()); 
-          
-        // changing the name of Main thread 
-        t.setName("Geeks"); 
-        System.out.println("After name change: " + t.getName()); 
-          
-        // getting priority of Main thread 
-        System.out.println("Main thread priority: "+ t.getPriority()); 
-          
-        // setting priority of Main thread to MAX(10) 
-        t.setPriority(Thread.MIN_PRIORITY); 
-          
-        System.out.println("Main thread new priority: "+ t.getPriority()); 
-          
-          
-        for (int i = 0; i < 5; i++) 
-        { 
-            System.out.println("Main thread"); 
-        } 
-          
-        // Main thread creating a child thread 
-        ChildThread ct = new ChildThread(); 
-          
-        // getting priority of child thread 
-        // which will be inherited from Main thread 
-        // as it is created by Main thread 
-        System.out.println("Child thread priority: "+ ct.getPriority()); 
-          
-        // setting priority of Main thread to MIN(1) 
-        ct.setPriority(Thread.MAX_PRIORITY); 
-          
-        System.out.println("Child thread new priority: "+ ct.getPriority()); 
-          
-        // starting child thread 
-        ct.start(); 
-    }
-} 
-  
-// Child Thread class 
-class ChildThread extends Thread 
-{ 
-    @Override
-    public void run()  
-    { 
-        for (int i = 0; i < 5; i++) 
-        { 
-            System.out.println("Child thread"); 
-        } 
-    } 
-} 
+	public static void main(String[] args) {
+		System.out.println(Thread.currentThread().getPriority());
+		//Thread.currentThread().setPriority(9);
+		MyThread3 t = new MyThread3();
+		MyThread4 t1 = new MyThread4();
+		//System.out.println(t.getPriority());
+		
+		t.setPriority(4);	    //----> 1
+		t1.setPriority(8);
+		System.out.println(t.getPriority());
+		t.start();
+		t1.start();
+		
+	}
+
+}
