@@ -1,4 +1,4 @@
-package arjun.prgms.generics;
+package com.arjun.java.generics;
 
 class Gen<T> {
 
