@@ -1,4 +1,4 @@
-package com.arjun.java.thread;
+package arjun.prgms.threads;
 
 class Box {
 
@@ -78,9 +78,9 @@ class Producer extends Thread {
 public class ProducerConsumerTest {
 
 	public static void main(String[] args) {
-		Box c = new Box();
-		Producer p1 = new Producer(c, 1);
-		Consumer c1 = new Consumer(c, 1);
+		Box b = new Box();
+		Producer p1 = new Producer(b, 1);
+		Consumer c1 = new Consumer(b, 1);
 		p1.start();
 		c1.start();
 	}
