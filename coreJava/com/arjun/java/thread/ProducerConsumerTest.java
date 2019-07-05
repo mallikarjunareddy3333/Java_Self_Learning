@@ -1,6 +1,7 @@
 package com.arjun.java.thread;
 
 class Box {
+
 	private int contents;
 	private boolean available = false;
 
@@ -9,10 +10,8 @@ class Box {
 			try {
 				wait();
 			} catch (InterruptedException e) {
-
 			}
 		}
-
 		available = false;
 		notifyAll();
 		return contents;
@@ -23,15 +22,12 @@ class Box {
 			try {
 				wait();
 			} catch (InterruptedException e) {
-
 			}
 		}
-
-		available = true;
 		contents = value;
+		available = true;
 		notifyAll();
 	}
-
 }
 
 class Consumer extends Thread {
@@ -46,14 +42,9 @@ class Consumer extends Thread {
 	@Override
 	public void run() {
 		int value = 0;
-		for (int i = 0; i < 10; i++) {
+		for (int i = 1; i <= 10; i++) {
 			value = b.get();
-			System.out.println("Consumer #" + this.number + " got: " + value);
-			try {
-				sleep(1000);
-			} catch (InterruptedException e) {
-
-			}
+			System.out.println("Consumer #" + this.number + " get: " + value);
 		}
 	}
 
@@ -73,11 +64,12 @@ class Producer extends Thread {
 		for (int i = 1; i <= 10; i++) {
 			b.put(i);
 			System.out.println("Producer #" + this.number + " put: " + i);
+			
 			try {
 				sleep(1000);
 			} catch (InterruptedException e) {
-
 			}
+			
 		}
 	}
 
